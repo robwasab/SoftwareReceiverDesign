@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>~/Documents/Python/SoftwareReceiverDesign/HTML/letters2pam_edu.py.html</title>
+<meta name="Generator" content="Vim/7.3">
+<meta name="plugin-version" content="vim7.3_v6">
+<meta name="syntax" content="python">
+<meta name="settings" content="use_css">
+<style type="text/css">
+<!--
+pre { font-family: monospace; color: #000000; background-color: #ffffff; }
+body { font-family: monospace; color: #000000; background-color: #ffffff; }
+.PreProc { color: #c000c0; }
+.Comment { color: #0000c0; }
+.Statement { color: #af5f00; }
+.Identifier { color: #008080; }
+.Constant { color: #c00000; }
+-->
+</style>
+</head>
+<body>
+<pre>
+        s = <span class="Constant">'dead'</span>
+        <span class="Identifier">print</span> [<span class="Constant">'{:08b}'</span>.<span class="Identifier">format</span>(<span class="Identifier">ord</span>(c)) <span class="Statement">for</span> c <span class="Statement">in</span> s ]
+        <span class="Comment"># &gt;&gt;</span>
+        <span class="Comment"># ['01100100', '01100101', '01100001', '01100100']</span>
+
+        <span class="Identifier">print</span> [<span class="Identifier">list</span>(<span class="Constant">'{:08b}'</span>.<span class="Identifier">format</span>(<span class="Identifier">ord</span>(c))) <span class="Statement">for</span> c <span class="Statement">in</span> s ]
+        <span class="Comment"># &gt;&gt;</span>
+        <span class="Comment"># [['0', '1', '1', '0', '0', '1', '0', '0'], </span>
+        <span class="Comment">#  ['0', '1', '1', '0', '0', '1', '0', '1'], </span>
+        <span class="Comment">#  ['0', '1', '1', '0', '0', '0', '0', '1'], </span>
+        <span class="Comment">#  ['0', '1', '1', '0', '0', '1', '0', '0']]</span>
+
+        <span class="Identifier">print</span> [np.reshape(<span class="Identifier">list</span>(<span class="Constant">'{:08b}'</span>.<span class="Identifier">format</span>(<span class="Identifier">ord</span>(c))),(<span class="Constant">4</span>,<span class="Constant">2</span>)).tolist() <span class="Statement">for</span> c <span class="Statement">in</span> s ]
+        <span class="Comment"># &gt;&gt;</span>
+        <span class="Comment"># [[['0', '1'], </span>
+        <span class="Comment">#   ['1', '0'], </span>
+        <span class="Comment">#   ['0', '1'], </span>
+        <span class="Comment">#   ['0', '0']], </span>
+        <span class="Comment">#  [['0', '1'], </span>
+        <span class="Comment">#   ['1', '0'],</span>
+        <span class="Comment">#   ['0', '1'], </span>
+        <span class="Comment">#   ['0', '1']], </span>
+        <span class="Comment">#  [['0', '1'], </span>
+        <span class="Comment">#   ['1', '0'], </span>
+        <span class="Comment">#   ['0', '0'], </span>
+        <span class="Comment">#   ['0', '1']], </span>
+        <span class="Comment">#  [['0', '1'], </span>
+        <span class="Comment">#   ['1', '0'], </span>
+        <span class="Comment">#   ['0', '1'], </span>
+        <span class="Comment">#   ['0', '0']]]</span>
+
+        <span class="Identifier">print</span> [[<span class="Constant">''</span>.join(pair) <span class="Statement">for</span> pair <span class="Statement">in</span> np.reshape(<span class="Identifier">list</span>(<span class="Constant">'{:08b}'</span>.<span class="Identifier">format</span>(<span class="Identifier">ord</span>(c))),(<span class="Constant">4</span>,<span class="Constant">2</span>)).tolist()] <span class="Statement">for</span> c <span class="Statement">in</span> s ]
+        <span class="Comment"># &gt;&gt;</span>
+        <span class="Comment"># [['01', '10', '01', '00'], ['01', '10', '01', '01'], ['01', '10', '00', '01'], ['01', '10', '01', '00']]</span>
+
+        <span class="Comment"># convert each bit pair to a decimal number, these will represent amplitudes</span>
+        <span class="Identifier">print</span> [[<span class="Identifier">int</span>(<span class="Constant">''</span>.join(pair),<span class="Constant">2</span>) <span class="Statement">for</span> pair <span class="Statement">in</span> np.reshape(<span class="Identifier">list</span>(<span class="Constant">'{:08b}'</span>.<span class="Identifier">format</span>(<span class="Identifier">ord</span>(c))),(<span class="Constant">4</span>,<span class="Constant">2</span>)).tolist()] <span class="Statement">for</span> c <span class="Statement">in</span> s ]
+        <span class="Comment"># &gt;&gt;</span>
+        <span class="Comment"># [[1, 2, 1, 0], [1, 2, 1, 1], [1, 2, 0, 1], [1, 2, 1, 0]]</span>
+
+        <span class="Comment"># shift and scale each number to -3, -1, 1, 3</span>
+        <span class="Identifier">print</span> [[<span class="Identifier">int</span>(<span class="Constant">''</span>.join(pair),<span class="Constant">2</span>)*<span class="Constant">2</span>-<span class="Constant">3</span> <span class="Statement">for</span> pair <span class="Statement">in</span> np.reshape(<span class="Identifier">list</span>(<span class="Constant">'{:08b}'</span>.<span class="Identifier">format</span>(<span class="Identifier">ord</span>(c))),(<span class="Constant">4</span>,<span class="Constant">2</span>)).tolist()] <span class="Statement">for</span> c <span class="Statement">in</span> s ]
+        <span class="Comment"># &gt;&gt;</span>
+        <span class="Comment"># [[-1, 1, -1, -3], [-1, 1, -1, -1], [-1, 1, -3, -1], [-1, 1, -1, -3]]</span>
+
+        <span class="Comment"># combine all the elements into one list with itertools</span>
+        <span class="PreProc">import</span> itertools
+        <span class="Identifier">print</span> <span class="Identifier">list</span>(itertools.chain(*[[<span class="Identifier">int</span>(<span class="Constant">''</span>.join(pair),<span class="Constant">2</span>)*<span class="Constant">2</span>-<span class="Constant">3</span> <span class="Statement">for</span> pair <span class="Statement">in</span> np.reshape(<span class="Identifier">list</span>(<span class="Constant">'{:08b}'</span>.<span class="Identifier">format</span>(<span class="Identifier">ord</span>(c))),(<span class="Constant">4</span>,<span class="Constant">2</span>)).tolist()] <span class="Statement">for</span> c <span class="Statement">in</span> s ]))
+        <span class="Comment"># &gt;&gt;</span>
+        <span class="Comment"># [-1, 1, -1, -3, -1, 1, -1, -1, -1, 1, -3, -1, -1, 1, -1, -3]</span>
+</pre>
+</body>
+</html>

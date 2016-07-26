@@ -3,6 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pdb
 from letters2pam import letters2pam
+from LowPass import LowPass
 
 def pulseshape(signal, M, debug = False):
 	mup = np.zeros(M*len(signal))

@@ -2,7 +2,7 @@ import numpy as np
 from numpy.fft import fft, fftfreq
 import matplotlib.pyplot as plt
 
-def plotspec(data, ts):
+def plotspec(data, ts, block = False):
 	fft_data = fft(data)
 	fft_axis = fftfreq(len(data))
 	plt.subplot(311)
@@ -16,7 +16,7 @@ def plotspec(data, ts):
 	plt.plot(fft_axis, np.angle(fft_data)/np.pi)
 	plt.ylabel('Phase/pi')
 	plt.title('Phase')
-	plt.show(block = False)
+	plt.show(block = block)
 
 def test():
 	times = np.arange(0,1024)*1.0/44.1E3
