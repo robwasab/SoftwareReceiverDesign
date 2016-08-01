@@ -6,6 +6,7 @@ from plotspec import plotspec
 from pulseshape import pulseshape
 import matplotlib.pyplot as plt
 from LowPass import LowPass
+from Integrator import Integrator
 
 def costa_lp_filter_sim():
 	M = 101;
@@ -22,13 +23,16 @@ def costa_lp_filter_sim():
 	in_phase_out = np.zeros(len(tx))
 	qu_phase_out = np.zeros(len(tx))
 	phases = np.zeros(len(tx))
-	mu = 0.1
+	mu = 0.01
+
+	vco_phase_integrator = Integrator(2.0*pi*(fc-5)/fs)
 
 	for phase_off in np.arange(8, -1, -1)*pi/8.0:
 	
 		for n in range(0, len(tx)-1):
 			t = times[n]
-			vco_phase = 2.0*np.pi*fc*t
+			#vco_phase = 2.0*np.pi*fc*t
+			vco_phase = vco_phase_integrator.work(1.0)
 			in_vco = 2.0*np.cos(vco_phase - phase_off + phases[n])
 			qu_vco = 2.0*np.sin(vco_phase - phase_off + phases[n])
 			in_phase_out[n] = in_phase_lp.work(in_vco*tx[n])
